@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 
 export const App = () => {
-  const [video4x4, setVideo4x4] = useState('')
+  const [image, setImage] = useState('')
+  const [video, setVideo] = useState('')
+  const [audio, setAudio] = useState('')
   const [data, setData] = useState<string>('')
+
   useEffect(() => {
-    const fetchVideo = async () => {
-      const path = await window.electron.getResource('videos/4x4.mp4')
-      setVideo4x4(path)
+    const fetchResources = async () => {
+      const imagePath = await window.electron.getResource('images/cover.jpg')
+      const videoPath = await window.electron.getResource('videos/4x4.mp4')
+      const audioPath = await window.electron.getResource('audios/Sensei.mp3')
+      setImage(imagePath)
+      setVideo(videoPath)
+      setAudio(audioPath)
     }
-    fetchVideo()
+    fetchResources()
 
     window.electron.getData().then((storedData) => {
       setData(storedData)
@@ -25,7 +31,9 @@ export const App = () => {
   return (
     <div>
       <h1>TEST-ELECTRON-VITE-REACT</h1>
-      {video4x4 && <video controls src={video4x4} />}
+      <img src={image} alt="4x4.jpg" />
+      <video src={video} controls />
+      <audio src={audio} controls />
       <div>
         <h1>Electron Store Example</h1>
         <p>Stored Data: {data}</p>
