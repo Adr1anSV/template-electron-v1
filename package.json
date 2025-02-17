@@ -1,5 +1,8 @@
 {
-  "name": "template-electron",
+  "name": "app-adrian",
+  "author": "Adrian Sotomayor <sotomayorvalerioadrian@gmail.com>",
+  "license": "MIT",
+  "Description": "Electron Vite App",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,8 +18,8 @@
     "build": "tsc -b && vite build"
   },
   "build": {
-    "appId": "com.AdrianApp.electron",
-    "productName": "AdrianApp",
+    "appId": "com.app-adrian.electron",
+    "productName": "app-adrian",
     "directories": {
       "output": "dist-electron"
     },
@@ -44,7 +47,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "AdrianApp",
+      "shortcutName": "${productName}",
       "deleteAppDataOnUninstall": true,
       "runAfterFinish": false,
       "artifactName": "${productName}-Setup-${version}.${ext}"
