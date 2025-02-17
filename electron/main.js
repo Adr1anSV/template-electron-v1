@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import Store from 'electron-store'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.join(__filename, '..')
 
@@ -14,6 +15,9 @@ if (!isDev && !isPreview) {
   recursosPath = path.join(app.getAppPath(), '..')
 }
 console.log(`=> Recursos: file://${recursosPath}`)
+
+// Inicializar electron-store
+const store = new Store()
 
 let mainWindow
 app.whenReady().then(() => {
@@ -36,7 +40,7 @@ app.whenReady().then(() => {
         mainWindow.restore()
         mainWindow.show()
       }
-    }, 1000)
+    }, 2000)
   })
 
   if (isDev) {
@@ -62,4 +66,14 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('get-resource', (_, fileName) => {
   return `file://${path.join(recursosPath, fileName)}`
+})
+
+// IPC para interactuar con el renderer (obtener y guardar datos)
+ipcMain.handle('get-data', () => {
+  return store.get('data') || 'No data available'
+})
+
+ipcMain.handle('set-data', (_, value) => {
+  store.set('data', value)
+  return `Data saved: ${value}`
 })

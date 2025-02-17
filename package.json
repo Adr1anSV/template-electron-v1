@@ -15,8 +15,8 @@
     "build": "tsc -b && vite build"
   },
   "build": {
-    "appId": "com.miapp.electron",
-    "productName": "MiApp",
+    "appId": "com.AdrianApp.electron",
+    "productName": "AdrianApp",
     "directories": {
       "output": "dist-electron"
     },
@@ -25,9 +25,33 @@
         "from": "resources",
         "to": "resources"
       }
-    ]
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AdrianApp",
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": false,
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    }
   },
   "dependencies": {
+    "electron-store": "^10.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
