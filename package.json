@@ -1,8 +1,7 @@
 {
   "name": "app-adrian",
   "author": "Adrian Sotomayor <sotomayorvalerioadrian@gmail.com>",
-  "license": "MIT",
-  "Description": "Electron Vite App",
+  "description": "Electron Vite App",
   "private": true,
   "version": "0.0.0",
   "type": "module",
